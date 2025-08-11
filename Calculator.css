@@ -1,0 +1,122 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  background-color: rgb(222, 230, 228);
+}
+
+.container {
+  justify-self: center;
+  background-color: rgb(183, 190, 189);
+  width: 25%;
+  margin: 50px;
+  border: 3px solid white;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+#delete,
+#equals {
+  grid-column: span 2;
+}
+
+#result {
+  background-color: rgb(238, 234, 234);
+  border: 0;
+  font-size: large;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 1px 1px rgb(150, 137, 137) inset;
+}
+
+#result:hover {
+  cursor: none;
+}
+
+button {
+  user-select: none;
+  padding: 10px;
+  border: 0;
+  color: white;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 24px;
+  box-shadow: 2px 2px 2px 2px rgb(150, 137, 137);
+}
+
+button:hover {
+  background-color: rgb(173, 171, 171);
+}
+
+button:active {
+  transform: scale(90%);
+  transition: transform 0.05s ease;
+  border: 3px solid rgb(125, 202, 125);
+}
+
+.number {
+  background-color: rgb(102, 215, 243);
+}
+
+#equals {
+  background-color: rgb(165, 211, 37);
+}
+
+#clear {
+  background-color: red;
+}
+
+.operator,
+.operate {
+  background-color: steelblue;
+}
+
+#delete {
+  background-color: gold;
+}
+
+.enab,
+.dis {
+  display: flex;
+  justify-self: end;
+  background-color: rgb(222, 230, 228);
+  font-size: 20px;
+  padding: 5px;
+  color: black;
+  border: 3px solid rgb(199, 187, 187);
+}
+
+.enab:hover,
+.dis:hover {
+  background-color: rgb(222, 230, 228);
+}
+
+.enab:active,
+.dis:active {
+  transform: scale(105%);
+}
+
+.dis {
+  position: relative;
+}
+
+.enab {
+  position: absolute;
+  top: 10%;
+}
+
+.dis.close,
+.enab.close {
+  z-index: -1;
+}
+
+.operate.off,
+.number.disabled,
+.operator.exit,
+.clear.out {
+  pointer-events: none;
+  background-color: grey;
+}
