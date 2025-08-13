@@ -133,5 +133,3 @@ function changeSign(arg) {
     }
   });
 }
-
-
