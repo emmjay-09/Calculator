@@ -121,6 +121,7 @@ button:active {
  background-color: transparent;
  color: transparent;
  pointer-events: none;
+ border: 0;
 }
 
 .operate.off,
