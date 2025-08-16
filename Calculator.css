@@ -89,7 +89,7 @@ button:active {
 .enab,
 .dis {
   background-color: rgb(222, 230, 228);
-  width: 30%;
+  width: 50px;
   font-size: 20px;
   padding: 5px;
   color: black;
@@ -118,7 +118,9 @@ button:active {
 
 .dis.close,
 .enab.close {
-  z-index: -1;
+ background-color: transparent;
+ color: transparent;
+ pointer-events: none;
 }
 
 .operate.off,
