@@ -10,6 +10,8 @@ const disToggle = document.querySelectorAll(".enab");
 
 const signChange = document.querySelectorAll(".operator");
 
+const enabBorder = document.querySelector(".container")
+
 for (let i = 0; i < buttonsEl.length; i++) {
   buttonsEl[i].addEventListener("click", () => {
     let buttonDisplay = buttonsEl[i].textContent.trim();
@@ -19,13 +21,18 @@ for (let i = 0; i < buttonsEl.length; i++) {
       enableDisable("enable");
       enDisOff("disable");
     } else if (buttonDisplay === "on") {
-      enableDisable("enable");
-      enDisOff("disable");
-      closingBlock("disable");
-      outBlocks("enable");
-      changeSign("enable");
+      setTimeout(combineFunc, 1000);
+      function combineFunc() {
+        enableBorder("enable")
+        enableDisable("enable");
+        enDisOff("disable");
+        closingBlock("disable");
+        outBlocks("enable");
+        changeSign("enable");
+      }
     } else if (buttonDisplay === "off") {
       clearInput();
+      enableBorder("disable")
       enableDisable("disable");
       enDisOff("disable");
       closingBlock("enable");
@@ -132,4 +139,13 @@ function changeSign(arg) {
       return;
     }
   });
+}
+
+function enableBorder(arg){
+if (arg === "enable"){
+enabBorder.classList.add("active")
+}
+if (arg === "disable"){
+enabBorder.classList.remove("active")
+}
 }
