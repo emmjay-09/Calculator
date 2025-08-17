@@ -1,16 +1,18 @@
 const buttonsEl = document.querySelectorAll("button");
 
-const inputEl = document.getElementById("result");
+const inputEl = document.querySelector(".result");
 
 const disNumber = document.querySelectorAll(".number");
 
 const disOper = document.querySelectorAll(".operate");
 
-const disToggle = document.querySelectorAll(".enab");
+const enabToggle = document.querySelector(".enab");
+
+const disToggle = document.querySelector(".dis");
 
 const signChange = document.querySelectorAll(".operator");
 
-const enabBorder = document.querySelector(".container")
+const enabBorder = document.querySelector(".container");
 
 for (let i = 0; i < buttonsEl.length; i++) {
   buttonsEl[i].addEventListener("click", () => {
@@ -20,24 +22,38 @@ for (let i = 0; i < buttonsEl.length; i++) {
       clearInput();
       enableDisable("enable");
       enDisOff("disable");
+      changeSign("enable");
     } else if (buttonDisplay === "on") {
-      setTimeout(combineFunc, 1000);
+      loadingScreen("yes");
+      styleText("on");
+      setTimeout(combineFunc, 2500);
       function combineFunc() {
-        enableBorder("enable")
+        styleText("off");
+        loadingScreen("no");
+        enableBorder("enable");
         enableDisable("enable");
         enDisOff("disable");
-        closingBlock("disable");
+        enabHead("disable");
+        disHead("enable");
         outBlocks("enable");
         changeSign("enable");
       }
     } else if (buttonDisplay === "off") {
-      clearInput();
-      enableBorder("disable")
-      enableDisable("disable");
-      enDisOff("disable");
-      closingBlock("enable");
-      outBlocks("disable");
-      changeSign("disable");
+      offScreen();
+      outText("on");
+      setTimeout(joinFunc, 1500);
+      function joinFunc() {
+        changeSign("on");
+        outText("off");
+        clearInput();
+        enableBorder("disable");
+        enableDisable("disable");
+        enabHead("enable");
+        disHead("disable");
+        outBlocks("disable");
+        enDisOff("disable");
+        changeSign("disable");
+      }
     } else if (buttonDisplay === "DEL") {
       deleteInput(buttonDisplay);
       enableDisable("enable");
@@ -45,19 +61,30 @@ for (let i = 0; i < buttonsEl.length; i++) {
       enableDisable("disable");
       enDisOff("enable");
       calculateValue();
-    } else if (
-      buttonDisplay === "*" ||
-      buttonDisplay === "/" ||
-      buttonDisplay === "+" ||
-      buttonDisplay === "-"
-    ) {
+      changeSign("enable");
+    } else if (buttonDisplay === "*" || buttonDisplay === "/") {
       enDisOff("disable");
       enableDisable("enable");
       displayValue(buttonDisplay);
+    } else if (buttonDisplay === "+") {
+      changeSign("off");
+      enDisOff("disable");
+      enableDisable("enable");
+      displayValue(buttonDisplay);
+      changeSign("open")
+    } else if (buttonDisplay === "-") {
+      changeSign("close")
+      enDisOff("disable");
+      enableDisable("enable");
+      displayValue(buttonDisplay);
+      changeSign("on");
     } else {
+      changeSign("enable");
       displayValue(buttonDisplay);
       enableDisable("enable");
       enDisOff("enable");
+      changeSign("on");
+      changeSign("open")
     }
   });
 }
@@ -65,7 +92,7 @@ for (let i = 0; i < buttonsEl.length; i++) {
 function clearInput() {
   inputEl.value = "";
 }
-function calculateValue() {
+function calculateValue(key) {
   inputEl.value = eval(inputEl.value);
 }
 function deleteInput(buttonDisplay) {
@@ -105,16 +132,24 @@ function enDisOff(key) {
   });
 }
 
-function closingBlock(arg) {
-  disToggle.forEach((block) => {
-    if (arg === "enable") {
-      block.classList.remove("close");
-    } else if (arg === "disable") {
-      block.classList.add("close");
-    } else {
-      return;
-    }
-  });
+function enabHead(arg) {
+  if (arg === "enable") {
+    enabToggle.classList.remove("close");
+  } else if (arg === "disable") {
+    enabToggle.classList.add("close");
+  } else {
+    return;
+  }
+}
+
+function disHead(arg) {
+  if (arg === "enable") {
+    disToggle.classList.remove("close");
+  } else if (arg === "disable") {
+    disToggle.classList.add("close");
+  } else {
+    return;
+  }
 }
 
 function outBlocks(arg) {
@@ -135,17 +170,50 @@ function changeSign(arg) {
       exit.classList.remove("exit");
     } else if (arg === "disable") {
       exit.classList.add("exit");
-    } else {
-      return;
+    } else if (arg === "off") {
+      exit.classList.add("hidden");
+    } else if (arg === "on") {
+      exit.classList.remove("hidden");
+    } else if (arg === "close") {
+      exit.classList.add("block");
+    } else if (arg === "open") {
+      exit.classList.remove("block");
     }
   });
 }
 
-function enableBorder(arg){
-if (arg === "enable"){
-enabBorder.classList.add("active")
+function enableBorder(arg) {
+  if (arg === "enable") {
+    enabBorder.classList.add("active");
+  }
+  if (arg === "disable") {
+    enabBorder.classList.remove("active");
+  }
 }
-if (arg === "disable"){
-enabBorder.classList.remove("active")
+
+function loadingScreen(arg) {
+  if (arg === "yes") {
+    inputEl.value = "loading...";
+  } else if (arg === "no") {
+    inputEl.value = "";
+  }
 }
+
+function offScreen() {
+  inputEl.value = "turning off";
+}
+
+function styleText(arg) {
+  if (arg === "on") {
+    inputEl.classList.add("change");
+  } else if (arg === "off") {
+    inputEl.classList.remove("change");
+  }
+}
+function outText(arg) {
+  if (arg === "on") {
+    inputEl.classList.add("out");
+  } else if (arg === "off") {
+    inputEl.classList.remove("out");
+  }
 }
