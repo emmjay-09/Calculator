@@ -3,9 +3,8 @@
   margin: 0;
 }
 
-body{
+body {
   background-color: rgb(222, 230, 228);
-  
 }
 .container {
   justify-self: center;
@@ -21,20 +20,20 @@ body{
   padding: 0;
 }
 
-.structure{
+.structure {
   width: 310px;
   height: 410px;
   background-color: rgb(26, 157, 26);
   overflow: hidden;
   position: absolute;
-  top: 35px; 
+  top: 35px;
   display: flex;
   justify-self: center;
   z-index: -1;
 }
 
-.border.active{
-  background: conic-gradient(blue,lime);
+.border.active {
+  background: conic-gradient(blue, lime);
   width: 550px;
   height: 550px;
   border-radius: 50%;
@@ -46,7 +45,7 @@ body{
 }
 
 @keyframes border-rotate {
-  100%{
+  100% {
     transform: rotate(360deg);
   }
 }
@@ -184,6 +183,10 @@ button:active {
     width: 80%;
     background-color: rgb(137, 145, 145);
     border-radius: 5px;
+  }
+
+  .structure {
+    height: max-content;
   }
 
   .buttons {
