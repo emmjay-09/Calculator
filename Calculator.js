@@ -12,7 +12,12 @@ const disToggle = document.querySelector(".dis");
 
 const signChange = document.querySelectorAll(".operator");
 
-const enabBorder = document.querySelector(".container");
+const enabBorder = document.querySelector(".border");
+
+if (!/^[0-9]/.test(inputEl.value)) {
+  enableDisable("disable");
+  enDisOff("disable");
+} 
 
 for (let i = 0; i < buttonsEl.length; i++) {
   buttonsEl[i].addEventListener("click", () => {
@@ -26,6 +31,7 @@ for (let i = 0; i < buttonsEl.length; i++) {
     } else if (buttonDisplay === "on") {
       loadingScreen("yes");
       styleText("on");
+      inputOn();
       setTimeout(combineFunc, 2500);
       function combineFunc() {
         styleText("off");
@@ -42,6 +48,7 @@ for (let i = 0; i < buttonsEl.length; i++) {
       offScreen();
       outText("on");
       setTimeout(joinFunc, 1500);
+      inputOff();
       function joinFunc() {
         changeSign("on");
         outText("off");
@@ -71,9 +78,9 @@ for (let i = 0; i < buttonsEl.length; i++) {
       enDisOff("disable");
       enableDisable("enable");
       displayValue(buttonDisplay);
-      changeSign("open")
+      changeSign("open");
     } else if (buttonDisplay === "-") {
-      changeSign("close")
+      changeSign("close");
       enDisOff("disable");
       enableDisable("enable");
       displayValue(buttonDisplay);
@@ -84,7 +91,7 @@ for (let i = 0; i < buttonsEl.length; i++) {
       enableDisable("enable");
       enDisOff("enable");
       changeSign("on");
-      changeSign("open")
+      changeSign("open");
     }
   });
 }
@@ -92,6 +99,14 @@ for (let i = 0; i < buttonsEl.length; i++) {
 function clearInput() {
   inputEl.value = "";
 }
+
+function inputOn() {
+  inputEl.placeholder = "0.00";
+}
+function inputOff() {
+  inputEl.placeholder = "";
+}
+
 function calculateValue(key) {
   inputEl.value = eval(inputEl.value);
 }

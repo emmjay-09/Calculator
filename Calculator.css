@@ -1,22 +1,54 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  background-color: rgb(222, 230, 228);
 }
 
+body{
+  background-color: rgb(222, 230, 228);
+  
+}
 .container {
   justify-self: center;
-  background-color: rgb(218, 185, 224);
+  background-color: rgb(82, 87, 84);
   width: 300px;
-  max-width: 500px;
-  min-width: 50px;
+  height: 400px;
   margin: 40px;
   border: 3px solid white;
   display: flex;
   flex-direction: column;
   gap: 2px;
   border-radius: 5px;
-  transform: (10deg);
+  padding: 0;
+}
+
+.structure{
+  width: 310px;
+  height: 410px;
+  background-color: rgb(26, 157, 26);
+  overflow: hidden;
+  position: absolute;
+  top: 35px; 
+  display: flex;
+  justify-self: center;
+  z-index: -1;
+}
+
+.border.active{
+  background: conic-gradient(blue,lime);
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  margin-left: 8%;
+  margin-top: -60px;
+  position: absolute;
+  z-index: -1;
+  animation: border-rotate 6s infinite;
+}
+
+@keyframes border-rotate {
+  100%{
+    transform: rotate(360deg);
+  }
 }
 
 .buttons {
@@ -137,8 +169,6 @@ button:active {
   background-color: rgb(193, 195, 197);
 }
 
-
-
 .operate.off,
 .add.hidden,
 .minus.block,
@@ -147,10 +177,6 @@ button:active {
 .clear.out {
   pointer-events: none;
   background-color: grey;
-}
-
-.container.active {
-  border: 4px solid rgb(110, 236, 131);
 }
 
 @media (max-width: 300px) {
