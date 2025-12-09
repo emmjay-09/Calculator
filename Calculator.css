@@ -187,7 +187,7 @@ button:active {
 
   .structure {
     height: max-content;
-    color: violet;
+    background-color: violet;
   }
 
   .buttons {
