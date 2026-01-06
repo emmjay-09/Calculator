@@ -14,10 +14,9 @@ const signChange = document.querySelectorAll(".operator");
 
 const enabBorder = document.querySelector(".border");
 
-if (!/^[0-9]/.test(inputEl.value)) {
-  enableDisable("disable");
-  enDisOff("disable");
-} 
+window.addEventListener("keydown", () => {
+  inputEl.focus();
+});
 
 for (let i = 0; i < buttonsEl.length; i++) {
   buttonsEl[i].addEventListener("click", () => {
@@ -122,6 +121,59 @@ function deleteInput(buttonDisplay) {
 function displayValue(buttonDisplay) {
   let temp = (inputEl.value += buttonDisplay);
 }
+
+function keyDelete(buttonDisplay) {
+  inputEl.addEventListener("keydown", (e) => {
+    const k = e.key;
+    if (k === " " || k === "_") {
+      e.preventDefault();
+      return;
+    }
+    if (k === "Enter") {
+      e.preventDefault();
+      calculateValue();
+      return;
+    }
+    if (k === "Backspace") {
+      e.preventDefault();
+      deleteInput();
+      return;
+    }
+    const allowed = /[0-9+\-*/.]/;
+    if (allowed.test(k)) {
+      e.preventDefault();
+      changeSign("enable");
+      displayValue(k);
+      enableDisable("enable");
+      enDisOff("enable");
+      changeSign("on");
+      changeSign("open");
+    } else {
+      e.preventDefault();
+    }
+    if (k === "+") {
+      changeSign("off");
+      enDisOff("disable");
+      enableDisable("enable");
+      displayValue(buttonDisplay);
+      changeSign("open");
+    }
+    if (k === "-") {
+      changeSign("close");
+      enDisOff("disable");
+      enableDisable("enable");
+      displayValue(buttonDisplay);
+      changeSign("on");
+    }
+    if (k === "*" || k === "/") {
+      enDisOff("disable");
+      enableDisable("enable");
+      displayValue(buttonDisplay);
+    }
+  });
+}
+
+keyDelete();
 
 function enableDisable(arg) {
   disNumber.forEach((number) => {
@@ -232,3 +284,9 @@ function outText(arg) {
     inputEl.classList.remove("out");
   }
 }
+
+// inputEl.addEventListener("keydown", (e) => {
+//   if (e.key === " " || e.key === "*" || e.key === "_" || e.key === "-") {
+//     e.preventDefault();
+//   }
+// });

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +16,15 @@
         <button class="enab">on</button>
         <button class="dis close">off</button>
       </div>
-      <div><input type="text" class="result" readonly /></div>
+      <div>
+        <input
+          type="text"
+          class="result"
+          inputmode="numeric"
+          oninput="this.value = this.value.replace(/[^0-9+-/]/g, '');"
+          autofocus
+        />
+      </div>
 
       <div class="buttons">
         <button class="clear out" id="clear">AC</button>
